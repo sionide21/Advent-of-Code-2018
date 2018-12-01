@@ -9,11 +9,11 @@ defmodule AOC do
     |> String.to_integer()
   end
 
-  def day1(input) do
+  def day("1", "1", input) do
     Enum.sum(input)
   end
 
-  def day1_2(input) do
+  def day("1", "2", input) do
     input
     |> Stream.cycle
     |> Stream.scan((& &1 + &2))
@@ -25,5 +25,9 @@ defmodule AOC do
         {:cont, MapSet.put(seen, x)}
       end
     end)
+  end
+
+  def day(_, _, _) do
+    "Not Implemented"
   end
 end
