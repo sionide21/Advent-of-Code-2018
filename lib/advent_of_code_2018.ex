@@ -15,8 +15,8 @@ defmodule AOC do
 
   def day("1", "2", input) do
     input
-    |> Stream.cycle
-    |> Stream.scan((& &1 + &2))
+    |> Stream.cycle()
+    |> Stream.scan(&(&1 + &2))
     |> Stream.drop(1)
     |> Enum.reduce_while(MapSet.new(), fn x, seen ->
       if MapSet.member?(seen, x) do
