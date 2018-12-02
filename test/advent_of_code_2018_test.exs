@@ -14,4 +14,30 @@ defmodule AOCTest do
     assert AOC.day("1", "2", [-6, +3, +8, +5, -6]) == 5
     assert AOC.day("1", "2", [+7, +7, -2, -7, -4]) == 14
   end
+
+  test "Day 2 part 1" do
+    input = ~w[
+      abcdef
+      bababc
+      abbcde
+      abcccd
+      aabcdd
+      abcdee
+      ababab
+    ]
+    assert AOC.day("2", "1", input) == 12
+  end
+
+  test "Day 2 part 2" do
+    input = ~w[
+      abcde
+      fghij
+      klmno
+      pqrst
+      fguij
+      axcye
+      wvxyz
+    ]
+    assert AOC.day("2", "2", input) == "fgij"
+  end
 end

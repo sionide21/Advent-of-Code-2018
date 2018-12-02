@@ -23,7 +23,6 @@ defmodule Mix.Tasks.Solve do
 
   defp with_input(day, fun) do
     AOC.input(day)
-    |> Enum.map(&AOC.to_integer/1)
     |> fun.()
   rescue
     File.Error -> "No Input"

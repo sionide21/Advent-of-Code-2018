@@ -1,12 +1,15 @@
 defmodule AOC do
-  def input(day) do
+  def read_file(day) do
     File.stream!("inputs/day#{day}.txt")
+    |> Stream.map(&String.trim/1)
   end
 
-  def to_integer(str) do
-    str
-    |> String.trim()
-    |> String.to_integer()
+  def input("1") do
+    read_file(1) |> Enum.map(&String.to_integer/1)
+  end
+
+  def input(day) do
+    read_file(day)
   end
 
   def day("1", "1", input) do
@@ -25,6 +28,19 @@ defmodule AOC do
         {:cont, MapSet.put(seen, x)}
       end
     end)
+  end
+
+  def day("2", "1", input) do
+    twos = Enum.count(input, &AOC.Day2.has_repeat?(&1, 2))
+    threes = Enum.count(input, &AOC.Day2.has_repeat?(&1, 3))
+
+    twos * threes
+  end
+
+  def day("2", "2", input) do
+    input
+    |> Enum.to_list()
+    |> AOC.Day2.find_match()
   end
 
   def day(_, _, _) do
