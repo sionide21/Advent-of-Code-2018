@@ -57,17 +57,16 @@ defmodule AOC do
     claims = Enum.map(input, &AOC.Day3.parse/1)
     all = Enum.map(claims, & &1.id)
 
-    duplicates =
+    [unique] =
       claims
       |> AOC.Day3.build_map(fn fabric, claim, coord ->
         Map.update(fabric, coord, [claim.id], &[claim.id | &1])
       end)
-      |> Map.values()
-      |> Enum.filter(fn list -> Enum.count(list) > 1 end)
-      |> List.flatten()
-      |> Enum.uniq()
+      |> Enum.reduce(all, fn
+        {_, [_]}, uniques -> uniques
+        {_, dups}, uniques -> uniques -- dups
+      end)
 
-    [unique] = all -- duplicates
     unique
   end
 
