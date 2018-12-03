@@ -43,6 +43,34 @@ defmodule AOC do
     |> AOC.Day2.find_match()
   end
 
+  def day("3", "1", input) do
+    input
+    |> Enum.map(&AOC.Day3.parse/1)
+    |> AOC.Day3.build_map(fn fabric, _claim, coord ->
+      Map.update(fabric, coord, 1, &(&1 + 1))
+    end)
+    |> Enum.filter(fn {_, claims} -> claims > 1 end)
+    |> Enum.count()
+  end
+
+  def day("3", "2", input) do
+    claims = Enum.map(input, &AOC.Day3.parse/1)
+    all = Enum.map(claims, & &1.id)
+
+    duplicates =
+      claims
+      |> AOC.Day3.build_map(fn fabric, claim, coord ->
+        Map.update(fabric, coord, [claim.id], &[claim.id | &1])
+      end)
+      |> Map.values()
+      |> Enum.filter(fn list -> Enum.count(list) > 1 end)
+      |> List.flatten()
+      |> Enum.uniq()
+
+    [unique] = all -- duplicates
+    unique
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end
