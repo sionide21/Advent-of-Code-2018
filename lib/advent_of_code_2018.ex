@@ -70,6 +70,38 @@ defmodule AOC do
     unique
   end
 
+  def day("4", "1", input) do
+    input
+    |> AOC.Day4.parse()
+    |> AOC.Day4.sleep_schedules()
+    |> Enum.max_by(fn {_, schedule} ->
+      schedule
+      |> Map.values()
+      |> Enum.sum()
+    end)
+    |> case do
+      {guard, schedule} ->
+        {minute, _} = Enum.max_by(schedule, fn {_, v} -> v end)
+        minute * guard
+    end
+  end
+
+  def day("4", "2", input) do
+    input
+    |> AOC.Day4.parse()
+    |> AOC.Day4.sleep_schedules()
+    |> Enum.max_by(fn {_, schedule} ->
+      schedule
+      |> Map.values()
+      |> Enum.max()
+    end)
+    |> case do
+      {guard, schedule} ->
+        {minute, _} = Enum.max_by(schedule, fn {_, v} -> v end)
+        minute * guard
+    end
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end
