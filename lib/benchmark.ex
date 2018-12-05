@@ -17,7 +17,7 @@ defmodule Benchmark do
 
   def time_function(label, fun) do
     {time, result} = :timer.tc(fun)
-    IO.puts("#{label}: #{:erlang.convert_time_unit(time, :native, :microsecond)}")
+    IO.puts("#{label}: #{:erlang.convert_time_unit(time, :microsecond, :millisecond)}")
     result
   end
 end
