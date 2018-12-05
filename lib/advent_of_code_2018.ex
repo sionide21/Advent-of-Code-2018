@@ -8,6 +8,10 @@ defmodule AOC do
     read_file(1) |> Enum.map(&String.to_integer/1)
   end
 
+  def input("5") do
+    read_file(5) |> Enum.at(0)
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -100,6 +104,21 @@ defmodule AOC do
         {minute, _} = Enum.max_by(schedule, fn {_, v} -> v end)
         minute * guard
     end
+  end
+
+  def day("5", "1", input) do
+    input
+    |> String.to_charlist()
+    |> AOC.Day5.reaction_length()
+  end
+
+  def day("5", "2", input) do
+    input
+    |> String.to_charlist()
+    |> AOC.Day5.permutations()
+    |> Enum.map(&Task.async(fn -> AOC.Day5.reaction_length(&1) end))
+    |> Enum.map(&Task.await/1)
+    |> Enum.min()
   end
 
   def day(_, _, _) do
