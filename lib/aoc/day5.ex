@@ -3,16 +3,12 @@ defmodule AOC.Day5 do
     do_react(input, [], false)
   end
 
-  def do_react([a, b | rest], acc, _) when abs(a - b) == 32 do
+  def do_react([a | rest], [b | acc], _) when abs(a - b) == 32 do
     do_react(rest, acc, true)
   end
 
-  def do_react([a, b | rest], acc, reacted?) do
-    do_react([b | rest], [a | acc], reacted?)
-  end
-
-  def do_react([b], acc, reacted?) do
-    do_react([], [b | acc], reacted?)
+  def do_react([a | rest], acc, reacted?) do
+    do_react(rest, [a | acc], reacted?)
   end
 
   def do_react([], acc, true) do

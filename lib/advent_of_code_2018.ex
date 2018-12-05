@@ -116,8 +116,7 @@ defmodule AOC do
     input
     |> String.to_charlist()
     |> AOC.Day5.permutations()
-    |> Enum.map(&Task.async(fn -> AOC.Day5.reaction_length(&1) end))
-    |> Enum.map(&Task.await/1)
+    |> Enum.map(&AOC.Day5.reaction_length(&1))
     |> Enum.min()
   end
 
