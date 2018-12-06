@@ -12,6 +12,18 @@ defmodule AOC do
     read_file(5) |> Enum.at(0)
   end
 
+  def input("6") do
+    read_file(6)
+    |> Enum.map(fn str ->
+      [x, y] =
+        str
+        |> String.split(", ")
+        |> Enum.map(&String.to_integer/1)
+
+      {x, y}
+    end)
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -121,16 +133,11 @@ defmodule AOC do
   end
 
   def day("6", "1", input) do
-    input
-    |> Enum.map(fn str ->
-      [x, y] =
-        str
-        |> String.split(", ")
-        |> Enum.map(&String.to_integer/1)
+    AOC.Day6.largest_area(input)
+  end
 
-      {x, y}
-    end)
-    |> AOC.Day6.largest_area()
+  def day("6", "2", input) do
+    AOC.Day6.area_within_distance(input, 10000)
   end
 
   def day(_, _, _) do

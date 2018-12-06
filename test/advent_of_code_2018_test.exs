@@ -121,14 +121,28 @@ defmodule AOCTest do
 
   test "Day 6 part 1" do
     input = [
-      "1, 1",
-      "1, 6",
-      "8, 3",
-      "3, 4",
-      "5, 5",
-      "8, 9"
+      {1, 1},
+      {1, 6},
+      {8, 3},
+      {3, 4},
+      {5, 5},
+      {8, 9}
     ]
 
     assert AOC.day("6", "1", input) == 17
+  end
+
+  test "Day 6 part 2" do
+    input = [
+      {1, 1},
+      {1, 6},
+      {8, 3},
+      {3, 4},
+      {5, 5},
+      {8, 9}
+    ]
+
+    # ಠ_ಠ
+    assert AOC.Day6.area_within_distance(input, 32) == 16
   end
 end

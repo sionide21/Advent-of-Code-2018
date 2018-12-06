@@ -6,6 +6,32 @@ defmodule AOC.Day6 do
     |> Enum.max()
   end
 
+  def area_within_distance(points, max) do
+    center = center(points)
+    do_area_within_distance(points, center, max, 0, 0)
+  end
+
+  def do_area_within_distance(points, center, max, area, distance) do
+    center
+    |> reduce_around(distance, area, fn point, area ->
+      points
+      |> Enum.map(&distance(point, &1))
+      |> Enum.sum()
+      |> case do
+        distance when distance < max ->
+          area + 1
+        _ ->
+          area
+      end
+    end)
+    |> case do
+      ^area ->
+        area
+      new_area ->
+        do_area_within_distance(points, center, max, new_area, distance + 1)
+    end
+  end
+
   def areas(points) do
     center = center(points)
     do_areas(points, center, %{}, 0, false)
@@ -13,9 +39,7 @@ defmodule AOC.Day6 do
 
   def do_areas(points, point, areas, distance, done?) do
     new_areas =
-      point
-      |> square(distance)
-      |> Enum.reduce(areas, fn spot, areas ->
+      reduce_around(point, distance, areas, fn spot, areas ->
         points
         |> owner(spot)
         |> case do
@@ -39,6 +63,12 @@ defmodule AOC.Day6 do
       true ->
         do_areas(points, point, new_areas, distance + 1, false)
     end
+  end
+
+  def reduce_around(center, distance, acc, fun) do
+    center
+    |> square(distance)
+    |> Enum.reduce(acc, fun)
   end
 
   def owner(points, coord) do
