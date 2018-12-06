@@ -120,6 +120,19 @@ defmodule AOC do
     |> Enum.min()
   end
 
+  def day("6", "1", input) do
+    input
+    |> Enum.map(fn str ->
+      [x, y] =
+        str
+        |> String.split(", ")
+        |> Enum.map(&String.to_integer/1)
+
+      {x, y}
+    end)
+    |> AOC.Day6.largest_area()
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end

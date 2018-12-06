@@ -118,4 +118,17 @@ defmodule AOCTest do
   test "Day 5 part 2" do
     assert AOC.day("5", "2", "dabAcCaCBAcCcaDA") == 4
   end
+
+  test "Day 6 part 1" do
+    input = [
+      "1, 1",
+      "1, 6",
+      "8, 3",
+      "3, 4",
+      "5, 5",
+      "8, 9"
+    ]
+
+    assert AOC.day("6", "1", input) == 17
+  end
 end
