@@ -140,6 +140,20 @@ defmodule AOC do
     AOC.Day6.area_within_distance(input, 10000)
   end
 
+  def day("7", "1", input) do
+    input
+    |> AOC.Day7.build_graph()
+    |> AOC.Day7.flatten()
+    |> Enum.join()
+  end
+
+  def day("7", "2", input) do
+    input
+    |> AOC.Day7.build_graph()
+    |> AOC.Day7.flatten()
+    |> Enum.join()
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end

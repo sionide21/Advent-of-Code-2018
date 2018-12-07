@@ -20,6 +20,7 @@ defmodule AOC.Day6 do
       |> case do
         distance when distance < max ->
           area + 1
+
         _ ->
           area
       end
@@ -27,6 +28,7 @@ defmodule AOC.Day6 do
     |> case do
       ^area ->
         area
+
       new_area ->
         do_area_within_distance(points, center, max, new_area, distance + 1)
     end

@@ -145,4 +145,32 @@ defmodule AOCTest do
     # ಠ_ಠ
     assert AOC.Day6.area_within_distance(input, 32) == 16
   end
+
+  test "Day 7 part 1" do
+    input = [
+      "Step C must be finished before step A can begin.",
+      "Step C must be finished before step F can begin.",
+      "Step A must be finished before step B can begin.",
+      "Step A must be finished before step D can begin.",
+      "Step B must be finished before step E can begin.",
+      "Step D must be finished before step E can begin.",
+      "Step F must be finished before step E can begin."
+    ]
+
+    assert AOC.day("7", "1", input) == "CABDFE"
+  end
+
+  test "Day 7 part 2" do
+    input = [
+      "Step C must be finished before step A can begin.",
+      "Step C must be finished before step F can begin.",
+      "Step A must be finished before step B can begin.",
+      "Step A must be finished before step D can begin.",
+      "Step B must be finished before step E can begin.",
+      "Step D must be finished before step E can begin.",
+      "Step F must be finished before step E can begin."
+    ]
+
+    assert AOC.day("7", "2", input) == 15
+  end
 end
