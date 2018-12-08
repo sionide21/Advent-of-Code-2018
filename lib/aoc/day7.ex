@@ -28,7 +28,6 @@ defmodule AOC.Day7 do
   def process(graph, workers, base_time) do
     dependencies = dependencies(graph)
     workers = Enum.map(1..workers, fn _ -> nil end)
-    IO.puts("")
     do_process(dependencies, workers, base_time, 0, [], [])
   end
 
@@ -59,7 +58,7 @@ defmodule AOC.Day7 do
         end
       end)
 
-    inspect_step(workers, seen, done, dependencies, time)
+    # inspect_step(workers, seen, done, dependencies, time)
     do_process(dependencies, workers, base_time, time + 1, seen, done)
   end
 
