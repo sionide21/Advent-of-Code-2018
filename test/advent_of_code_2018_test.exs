@@ -171,6 +171,11 @@ defmodule AOCTest do
       "Step F must be finished before step E can begin."
     ]
 
-    assert AOC.day("7", "2", input) == 15
+    answer =
+      input
+      |> AOC.Day7.build_graph()
+      |> AOC.Day7.process(2, 0)
+
+    assert answer == 15
   end
 end

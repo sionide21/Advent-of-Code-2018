@@ -150,8 +150,7 @@ defmodule AOC do
   def day("7", "2", input) do
     input
     |> AOC.Day7.build_graph()
-    |> AOC.Day7.flatten()
-    |> Enum.join()
+    |> AOC.Day7.process(5, 60)
   end
 
   def day(_, _, _) do
