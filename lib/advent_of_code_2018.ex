@@ -24,6 +24,10 @@ defmodule AOC do
     end)
   end
 
+  def input("8") do
+    read_file(8) |> Enum.at(0)
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -151,6 +155,20 @@ defmodule AOC do
     input
     |> AOC.Day7.build_graph()
     |> AOC.Day7.process(5, 60)
+  end
+
+  def day("8", "1", input) do
+    input
+    |> String.split()
+    |> Enum.map(&String.to_integer/1)
+    |> AOC.Day8.sum()
+  end
+
+  def day("8", "2", input) do
+    input
+    |> String.split()
+    |> Enum.map(&String.to_integer/1)
+    |> AOC.Day8.value()
   end
 
   def day(_, _, _) do

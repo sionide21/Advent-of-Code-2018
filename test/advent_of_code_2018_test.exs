@@ -178,4 +178,14 @@ defmodule AOCTest do
 
     assert answer == 15
   end
+
+  test "Day 8 part 1" do
+    input = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+    assert AOC.day("8", "1", input) == 138
+  end
+
+  test "Day 8 part 2" do
+    input = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+    assert AOC.day("8", "2", input) == 66
+  end
 end
