@@ -17,7 +17,7 @@ defmodule AOC.Day9 do
 
   def play(game, marble) when rem(marble, 23) == 0 do
     player = rem(marble, game.players)
-    position = rem(game.current - 7, length(game.board))
+    position = mod(game.current - 7, length(game.board))
     {mine, board} = List.pop_at(game.board, position + 1)
     scores = Map.update(game.scores, player, mine + marble, &(&1 + mine + marble))
 
@@ -44,5 +44,12 @@ defmodule AOC.Day9 do
     scores
     |> Map.values()
     |> Enum.max()
+  end
+
+  defp mod(x, y) when x > 0 do
+    rem(x, y)
+  end
+  defp mod(x, y) when x <= 0 and y > abs(x) do
+    y + x
   end
 end
