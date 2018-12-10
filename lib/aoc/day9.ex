@@ -21,11 +21,7 @@ defmodule AOC.Day9 do
     {mine, board} = List.pop_at(game.board, position + 1)
     scores = Map.update(game.scores, player, mine + marble, &(&1 + mine + marble))
 
-    %{game |
-      board: board,
-      current: position,
-      scores: scores
-    }
+    %{game | board: board, current: position, scores: scores}
   end
 
   def play(game, marble) do
@@ -35,7 +31,7 @@ defmodule AOC.Day9 do
   end
 
   def play_game(players, turns) do
-    Enum.reduce(1..(turns), new(players), fn turn, game ->
+    Enum.reduce(1..turns, new(players), fn turn, game ->
       play(game, turn)
     end)
   end
@@ -49,6 +45,7 @@ defmodule AOC.Day9 do
   defp mod(x, y) when x > 0 do
     rem(x, y)
   end
+
   defp mod(x, y) when x <= 0 and y > abs(x) do
     y + x
   end

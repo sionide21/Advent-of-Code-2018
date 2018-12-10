@@ -192,7 +192,7 @@ defmodule AOCTest do
   test "Day 9 part 1" do
     assert AOC.day("9", "1", "9 players; last marble is worth 25 points") == 32
     assert AOC.day("9", "1", "10 players; last marble is worth 1618 points") == 8317
-    assert AOC.day("9", "1", "13 players; last marble is worth 7999 points") == 146373
+    assert AOC.day("9", "1", "13 players; last marble is worth 7999 points") == 146_373
     assert AOC.day("9", "1", "17 players; last marble is worth 1104 points") == 2764
     assert AOC.day("9", "1", "21 players; last marble is worth 6111 points") == 54718
     assert AOC.day("9", "1", "30 players; last marble is worth 5807 points") == 37305
