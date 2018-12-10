@@ -28,6 +28,10 @@ defmodule AOC do
     read_file(8) |> Enum.at(0)
   end
 
+  def input("9") do
+    read_file(9) |> Enum.at(0)
+  end
+
   def input("10") do
     read_file(10) |> Enum.join()
   end
@@ -173,6 +177,12 @@ defmodule AOC do
     |> String.split()
     |> Enum.map(&String.to_integer/1)
     |> AOC.Day8.value()
+  end
+
+  def day("9", "1", input) do
+    input
+    |> AOC.Day9.from_string()
+    |> AOC.Day9.high_score()
   end
 
   def day("10", "1", input) do
