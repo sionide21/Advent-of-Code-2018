@@ -3,9 +3,9 @@ defmodule AOC.Day9 do
 
   alias __MODULE__.Board
 
-  def from_string(str) do
+  def parse(str) do
     [_, players, turns] = Regex.run(~r/(\d+) players.+ (\d+) points/, str)
-    play_game(String.to_integer(players), String.to_integer(turns))
+    {String.to_integer(players), String.to_integer(turns)}
   end
 
   def new(players) do

@@ -180,8 +180,18 @@ defmodule AOC do
   end
 
   def day("9", "1", input) do
-    input
-    |> AOC.Day9.from_string()
+    {players, turns} = AOC.Day9.parse(input)
+
+    players
+    |> AOC.Day9.play_game(turns)
+    |> AOC.Day9.high_score()
+  end
+
+  def day("9", "2", input) do
+    {players, turns} = AOC.Day9.parse(input)
+
+    players
+    |> AOC.Day9.play_game(turns * 100)
     |> AOC.Day9.high_score()
   end
 
