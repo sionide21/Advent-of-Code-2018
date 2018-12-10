@@ -28,6 +28,10 @@ defmodule AOC do
     read_file(8) |> Enum.at(0)
   end
 
+  def input("10") do
+    read_file(10) |> Enum.join()
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -169,6 +173,19 @@ defmodule AOC do
     |> String.split()
     |> Enum.map(&String.to_integer/1)
     |> AOC.Day8.value()
+  end
+
+  def day("10", "1", input) do
+    input
+    |> AOC.Day10.parse()
+    |> AOC.Day10.solve()
+    |> (&("\n" <> &1)).()
+  end
+
+  def day("10", "2", input) do
+    input
+    |> AOC.Day10.parse()
+    |> AOC.Day10.time()
   end
 
   def day(_, _, _) do
