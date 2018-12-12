@@ -69,20 +69,26 @@ defmodule AOC.Day11 do
   end
 
   def best_ever(serial) do
-    powers = grid(300, 300, serial)
-    reduce(299, 299, {nil, 0, 0}, fn {x, y}=cell, acc ->
-      max_possible = 300 - max(x, y)
-      Enum.reduce(1..max_possible, {acc, 0}, fn size, {{max_pos, max_power, max_size}, power} ->
-        cell
-        |> power(size, power, powers)
-        |> case do
-          p when p > max_power -> {{cell, p, size}, p}
-          p -> {{max_pos, max_power, max_size}, p}
+    import Benchmark
+    powers = measure(grid(300, 300, serial))
+    reduce_times(299, {powers, nil, 0, 0}, fn size, {grid, max_pos, max_power, max_size} ->
+      grid = power_up(grid, size, powers)
+      reduce(300 - size, 300 - size, {grid, max_pos, max_power, max_size}, fn cell, acc={grid, _, max_power, _} ->
+        case grid[cell] do
+          p when p > max_power -> {grid, cell, p, size}
+          _ -> acc
         end
       end)
-      |> case do
-        {acc, _} -> acc
-      end
+    end)
+    |> case do
+      {_, max_pos, max_power, max_size} ->
+        {max_pos, max_size + 1, max_power}
+    end
+  end
+
+  def power_up(grid, level, powers) do
+    reduce(300-level, 300-level, grid, fn cell, grid ->
+      Map.update!(grid, cell, &power(cell, level, &1, powers))
     end)
   end
 end
