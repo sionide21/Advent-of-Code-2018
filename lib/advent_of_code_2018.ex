@@ -1,6 +1,12 @@
 defmodule AOC do
+  def file_path(day) do
+    "inputs/day#{day}.txt"
+  end
+
   def read_file(day) do
-    File.stream!("inputs/day#{day}.txt")
+    day
+    |> file_path()
+    |> File.stream!()
     |> Stream.map(&String.trim/1)
   end
 
@@ -34,6 +40,10 @@ defmodule AOC do
 
   def input("10") do
     read_file(10) |> Enum.join()
+  end
+
+  def input("13") do
+    File.read!(file_path(13))
   end
 
   def input(day) do
@@ -206,6 +216,20 @@ defmodule AOC do
     input
     |> AOC.Day10.parse()
     |> AOC.Day10.time()
+  end
+
+  def day("13", "1", input) do
+    input
+    |> AOC.Day13.parse_board()
+    |> AOC.Day13.first_crash()
+    |> AOC.Day13.output_coords()
+  end
+
+  def day("13", "2", input) do
+    input
+    |> AOC.Day13.parse_board()
+    |> AOC.Day13.last_cart()
+    |> AOC.Day13.output_coords()
   end
 
   def day(_, _, _) do
