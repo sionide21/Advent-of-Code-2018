@@ -46,6 +46,10 @@ defmodule AOC do
     File.read!(file_path(13))
   end
 
+  def input("15") do
+    File.read!(file_path(15))
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -230,6 +234,30 @@ defmodule AOC do
     |> AOC.Day13.parse_board()
     |> AOC.Day13.last_cart()
     |> AOC.Day13.output_coords()
+  end
+
+  def day("15", "1", input) do
+    {game, rounds} =
+      input
+      |> AOC.Day15.parse()
+      |> AOC.Day15.play_game()
+
+    game.players
+    |> Map.values()
+    |> Enum.sum()
+    |> Kernel.*(rounds)
+  end
+
+  def day("15", "2", input) do
+    {game, rounds} =
+      input
+      |> AOC.Day15.parse()
+      |> AOC.Day15.elves_win()
+
+    game.players
+    |> Map.values()
+    |> Enum.sum()
+    |> Kernel.*(rounds)
   end
 
   def day(_, _, _) do
