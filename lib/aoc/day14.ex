@@ -1,5 +1,5 @@
 defmodule AOC.Day14 do
-  defstruct [elves: [0, 1], index: 2, recipes: %{0 => 3, 1 => 7}]
+  defstruct elves: [0, 1], index: 2, recipes: %{0 => 3, 1 => 7}
 
   def next_ten(input) do
     do_next_ten(%__MODULE__{}, input + 10)
@@ -10,8 +10,9 @@ defmodule AOC.Day14 do
     |> merge()
     |> do_next_ten(target)
   end
+
   defp do_next_ten(chart, target) do
-    (target-10)..(target-1)
+    (target - 10)..(target - 1)
     |> Enum.map(&Map.fetch!(chart.recipes, &1))
     |> Enum.join()
   end
@@ -70,19 +71,20 @@ defmodule AOC.Day14 do
         {Map.put(recipes, index, recipe), index + 1}
       end)
 
-    elves = Enum.map(chart.elves, fn elf ->
-      chart.recipes
-      |> Map.fetch!(elf)
-      |> Kernel.+(elf + 1)
-      |> rem(index)
-    end)
+    elves =
+      Enum.map(chart.elves, fn elf ->
+        chart.recipes
+        |> Map.fetch!(elf)
+        |> Kernel.+(elf + 1)
+        |> rem(index)
+      end)
 
     %{chart | elves: elves, recipes: recipes, index: index}
   end
 
   defimpl Inspect, for: __MODULE__ do
     def inspect(%{elves: elves, recipes: recipes, index: index}, _opts) do
-      0..(index-1)
+      0..(index - 1)
       |> Enum.map(fn i ->
         case {Map.fetch!(recipes, i), Enum.member?(elves, i)} do
           {r, true} -> "(#{r})"

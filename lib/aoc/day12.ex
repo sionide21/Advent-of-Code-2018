@@ -17,6 +17,7 @@ defmodule AOC.Day12 do
         ".", {count, i} -> {count, i + 1}
         "#", {count, i} -> {count + i, i + 1}
       end)
+
     count
   end
 

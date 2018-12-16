@@ -11,6 +11,7 @@ defmodule AOC.Day13Test do
     \\-+-/  \\-+--/
       \\------/
     """
+
     coord =
       input
       |> Day13.parse_board()
@@ -29,6 +30,7 @@ defmodule AOC.Day13Test do
       |   ^
       \\<->/
     """
+
     coord =
       input
       |> Day13.parse_board()

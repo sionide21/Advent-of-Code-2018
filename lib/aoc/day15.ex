@@ -4,7 +4,9 @@ defmodule AOC.Day15 do
 
   def parse(input) do
     board = Board.parse(input)
-    players = board
+
+    players =
+      board
       |> Board.players(&is_character?/1)
       |> Map.new(fn {coord, _} -> {coord, 200} end)
 
@@ -28,6 +30,7 @@ defmodule AOC.Day15 do
           {:ok, [move | _]} ->
             board = Board.move(game.board, coord, move)
             players = move_player(game.players, coord, move)
+
             %{game | board: board, players: players}
             |> attack(move, team)
 
@@ -50,6 +53,7 @@ defmodule AOC.Day15 do
       neighbors ->
         target = Enum.min_by(neighbors, &Map.fetch!(game.players, &1))
         power = if(team == "E", do: game.elf_power, else: 3)
+
         {board, players} =
           game.players
           |> Map.fetch!(target)
@@ -95,6 +99,7 @@ defmodule AOC.Day15 do
     # IO.inspect(game.players)
     # Process.sleep(100)
     game = play_round(game)
+
     game.board
     |> Board.players(&is_character?/1)
     |> Enum.map(&elem(&1, 1))

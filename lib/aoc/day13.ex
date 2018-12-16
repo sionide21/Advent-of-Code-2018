@@ -10,6 +10,7 @@ defmodule AOC.Day13 do
     |> Board.carts()
     |> Enum.reduce_while({:more, board}, fn cart, {:more, board} ->
       next = Cart.next(cart)
+
       if Board.has_cart?(board, next) do
         {:halt, {:done, next}}
       else
@@ -28,13 +29,16 @@ defmodule AOC.Day13 do
       |> Board.carts()
       |> Enum.reduce(board, fn cart, board ->
         next = Cart.next(cart)
+
         cond do
           !Board.has_cart?(board, cart.coord) ->
             board
+
           Board.has_cart?(board, next) ->
             board
             |> Board.remove_cart(next)
             |> Board.remove_cart(cart.coord)
+
           true ->
             Board.move(board, cart)
         end

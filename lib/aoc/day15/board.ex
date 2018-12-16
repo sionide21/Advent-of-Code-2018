@@ -29,12 +29,12 @@ defmodule AOC.Day15.Board do
     Map.get(positions, coord) == value
   end
 
-  def move(board=%{positions: positions}, from, to) do
+  def move(board = %{positions: positions}, from, to) do
     {value, positions} = Map.get_and_update!(positions, from, &{&1, "."})
     %{board | positions: Map.replace!(positions, to, value)}
   end
 
-  def remove(board=%{positions: positions}, from) do
+  def remove(board = %{positions: positions}, from) do
     %{board | positions: Map.put(positions, from, ".")}
   end
 
@@ -44,6 +44,7 @@ defmodule AOC.Day15.Board do
     board
     |> bfs(visitable?, start, %{}, fn {coord, el, from}, acc ->
       path = [coord | Map.get(acc, from, [])]
+
       if el == target_type do
         {:halt, {:ok, Enum.reverse(path)}}
       else
@@ -53,6 +54,7 @@ defmodule AOC.Day15.Board do
     |> case do
       {:ok, path} ->
         {:ok, path}
+
       _ ->
         :error
     end

@@ -165,6 +165,7 @@ defmodule AOC.Day15Test do
     #.....#
     #######
     """
+
     game = Day15.parse(input)
     game = %{game | elf_power: 50}
     game = Day15.play_round(game)

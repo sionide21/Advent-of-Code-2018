@@ -7,7 +7,7 @@ defmodule AOC.Day14Test do
     assert Day14.next_ten(5) == "0124515891"
     assert Day14.next_ten(18) == "9251071085"
     assert Day14.next_ten(2018) == "5941429882"
-    assert Day14.next_ten(702831) == "1132413111"
+    assert Day14.next_ten(702_831) == "1132413111"
   end
 
   @tag timeout: :infinity

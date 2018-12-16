@@ -13,22 +13,31 @@ defmodule AOC.Day13.Cart do
   defp next_coord({x, y}, "^") do
     {x, y - 1}
   end
+
   defp next_coord({x, y}, "v") do
     {x, y + 1}
   end
+
   defp next_coord({x, y}, ">") do
     {x + 1, y}
   end
+
   defp next_coord({x, y}, "<") do
     {x - 1, y}
   end
 
   defp orient(cart, "+") do
-    %{cart | next_turn: next_turn(cart.next_turn), direction: turn(cart.next_turn, cart.direction)}
+    %{
+      cart
+      | next_turn: next_turn(cart.next_turn),
+        direction: turn(cart.next_turn, cart.direction)
+    }
   end
+
   defp orient(cart, curve) when curve in ["\\", "/"] do
     %{cart | direction: curve(cart.direction, curve)}
   end
+
   defp orient(cart, _) do
     cart
   end

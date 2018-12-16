@@ -74,6 +74,7 @@ defmodule AOC.Day15.BoardTest do
     #...G.#
     #######
     """
+
     board = Board.parse(input)
     visitable? = &(&1 == ".")
     {:ok, result} = Board.shortest_path(board, visitable?, {1, 2}, "G")
@@ -89,6 +90,7 @@ defmodule AOC.Day15.BoardTest do
     #.....#
     #######
     """
+
     board = Board.parse(input)
     visitable? = &(&1 == ".")
     {:ok, result} = Board.shortest_path(board, visitable?, {1, 2}, "G")
@@ -104,6 +106,7 @@ defmodule AOC.Day15.BoardTest do
     #...#G#
     #######
     """
+
     board = Board.parse(input)
     visitable? = &(&1 == ".")
     assert :error = Board.shortest_path(board, visitable?, {1, 2}, "G")
@@ -117,18 +120,19 @@ defmodule AOC.Day15.BoardTest do
     #.G.E.#
     #######
     """
+
     board = Board.parse(input)
     character? = &(&1 in ["E", "G"])
 
     assert Board.players(board, character?) == [
-      {{1, 2}, "G"},
-      {{1, 4}, "E"},
-      {{2, 1}, "E"},
-      {{2, 3}, "G"},
-      {{2, 5}, "E"},
-      {{3, 2}, "G"},
-      {{3, 4}, "E"}
-    ]
+             {{1, 2}, "G"},
+             {{1, 4}, "E"},
+             {{2, 1}, "E"},
+             {{2, 3}, "G"},
+             {{2, 5}, "E"},
+             {{3, 2}, "G"},
+             {{3, 4}, "E"}
+           ]
   end
 
   test "current?" do
@@ -139,6 +143,7 @@ defmodule AOC.Day15.BoardTest do
     #.G.E.#
     #######
     """
+
     board = Board.parse(input)
 
     assert Board.current?(board, {{1, 2}, "G"})
@@ -154,21 +159,23 @@ defmodule AOC.Day15.BoardTest do
     #.G.E.#
     #######
     """
+
     board = Board.parse(input)
 
     assert Board.move(board, {1, 2}, {2, 2}) |> to_string() == """
-    #######
-    #...E.#
-    #EGG.E#
-    #.G.E.#
-    #######\
-    """
+           #######
+           #...E.#
+           #EGG.E#
+           #.G.E.#
+           #######\
+           """
+
     assert Board.move(board, {1, 2}, {1, 3}) |> to_string() == """
-    #######
-    #..GE.#
-    #E.G.E#
-    #.G.E.#
-    #######\
-    """
+           #######
+           #..GE.#
+           #E.G.E#
+           #.G.E.#
+           #######\
+           """
   end
 end

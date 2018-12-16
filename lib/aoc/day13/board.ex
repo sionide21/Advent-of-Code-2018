@@ -29,6 +29,7 @@ defmodule AOC.Day13.Board do
   def move(board, cart) do
     coord = Cart.next(cart)
     rail = Map.fetch!(board.rails, coord)
+
     carts =
       board.carts
       |> Map.delete(cart.coord)
@@ -81,8 +82,8 @@ defmodule AOC.Day13.Board do
 
   defimpl Inspect, for: __MODULE__ do
     def inspect(board, _opts) do
-      Enum.map(0..board.height-1, fn y ->
-        Enum.map(0..board.width-1, fn x ->
+      Enum.map(0..(board.height - 1), fn y ->
+        Enum.map(0..(board.width - 1), fn x ->
           if AOC.Day13.Board.has_cart?(board, {x, y}) do
             Map.get(board.carts, {x, y}).direction
           else
