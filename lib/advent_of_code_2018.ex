@@ -50,6 +50,10 @@ defmodule AOC do
     File.read!(file_path(15))
   end
 
+  def input("16") do
+    {read_file("16_1"), read_file("16_2")}
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -258,6 +262,23 @@ defmodule AOC do
     |> Map.values()
     |> Enum.sum()
     |> Kernel.*(rounds)
+  end
+
+  def day("16", "1", {input, _}) do
+    input
+    |> AOC.Day16.parse_part1()
+    |> Enum.map(fn [input, {_, a, b, c}, output] ->
+      AOC.Day16.possible_ops(input, {a, b, c}, output)
+      |> Enum.count()
+    end)
+    |> Enum.count(&(&1 >= 3))
+  end
+
+  def day("16", "2", {_, input}) do
+    input
+    |> AOC.Day16.parse_part2()
+    |> Enum.reduce({0, 0, 0, 0}, &AOC.Day16.op/2)
+    |> elem(0)
   end
 
   def day(_, _, _) do
