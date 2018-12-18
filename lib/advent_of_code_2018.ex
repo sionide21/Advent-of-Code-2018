@@ -281,6 +281,24 @@ defmodule AOC do
     |> elem(0)
   end
 
+  def day("18", "1", input) do
+    {_open, trees, lumber} =
+      input
+      |> AOC.Day18.parse()
+      |> AOC.Day18.count_after(10)
+
+    trees * lumber
+  end
+
+  def day("18", "2", input) do
+    grid = AOC.Day18.parse(input)
+    cycle = AOC.Day18.cycle_length(grid, 1000)
+    similar = rem(1_000_000_000 - 1000, cycle) + 1000
+    {_open, trees, lumber} = AOC.Day18.count_after(grid, similar)
+
+    trees * lumber
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end

@@ -311,4 +311,21 @@ defmodule AOCTest do
 
     assert AOC.day("15", "2", input) == 4988
   end
+
+  test "Day 18 part 1" do
+    input = ~w[
+      .#.#...|#.
+      .....#|##|
+      .|..|...#.
+      ..|#.....#
+      #.#|||#|#|
+      ...#.||...
+      .|....|...
+      ||...#|.#|
+      |.||||..|.
+      ...#.|..|.
+    ]
+
+    assert AOC.day("18", "1", input) == 1147
+  end
 end
