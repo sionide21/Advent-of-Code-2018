@@ -299,6 +299,18 @@ defmodule AOC do
     trees * lumber
   end
 
+  def day("19", "1", input) do
+    program =
+      input
+      |> Enum.to_list()
+      |> AOC.Day19.parse()
+      |> AOC.Day19.run()
+
+      IO.inspect(program.registers)
+
+    elem(program.registers, 0)
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end

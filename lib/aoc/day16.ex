@@ -40,7 +40,7 @@ defmodule AOC.Day16 do
     |> List.to_tuple()
   end
 
-  defp parse_op(op) do
+  def parse_op(op) do
     op
     |> String.split(" ")
     |> Enum.map(&String.to_integer/1)
@@ -112,8 +112,8 @@ defmodule AOC.Day16 do
     update_r(registers, operands, fn a, _b -> a end)
   end
 
-  def op(:seti, {a, b, c}, registers) do
-    update_i(registers, {b, a, c}, fn _b, a -> a end)
+  def op(:seti, {a, _b, c}, registers) do
+    store(a, registers, c)
   end
 
   def op(:gtir, {a, b, c}, registers) do
