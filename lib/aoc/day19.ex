@@ -42,13 +42,29 @@ defmodule AOC.Day19 do
   def load_op(program) do
     ip = elem(program.registers, program.ipr)
     # IO.inspect(ip, label: "ip")
+    # IO.inspect(Map.get(program.ops, ip), label: ip)
     Map.get(program.ops, ip, :halt)
   end
 
   def execute(program, {opcode, operands}) do
     # IO.inspect(operands, label: opcode)
     # IO.inspect(program.registers, label: "i")
+    # [
+    #   String.pad_leading(to_string(elem(program.registers, program.ipr)), 2),
+    #   opcode,
+    #   inspect(operands),
+    #   format_registers(AOC.Day16.op(opcode, operands, program.registers))
+    # ] |> Enum.join(" ") |> IO.puts
+    # # Process.sleep(100)
 
     %{program | registers: AOC.Day16.op(opcode, operands, program.registers)} # |> IO.inspect(label: "o")}
+  end
+
+  defp format_registers(r) do
+    r
+    |> Tuple.to_list()
+    |> Enum.map(&to_string/1)
+    |> Enum.map(&String.pad_trailing(&1, 3))
+    |> Enum.join(" ")
   end
 end

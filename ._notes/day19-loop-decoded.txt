@@ -1,0 +1,21 @@
+for (e = 1; e <= d; e++) {
+  for (b = 1; b <= d; b++) {
+    if (e * b == d) {
+      x += e
+    }
+  }
+}
+
+
+Enum.reduce(1..861, 0, fn e, x ->
+  Enum.reduce(1..861, x, fn b, x ->
+    if e * b == 861 do
+      x + e
+    else
+      x
+    end
+  end)
+end)
+
+a = 861
+Enum.filter(1..a, &(rem(a, &1) == 0)) |> Enum.sum()

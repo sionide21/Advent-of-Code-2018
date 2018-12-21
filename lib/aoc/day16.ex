@@ -140,6 +140,12 @@ defmodule AOC.Day16 do
     update_r(registers, operands, fn a, b -> bool(a == b) end)
   end
 
+  def op(:fact, operands, registers) do
+    update_r(registers, operands, fn a, _b ->
+      Enum.filter(1..a, &(rem(a, &1) == 0)) |> Enum.sum()
+    end)
+  end
+
   def update_r(registers, {a, b, c}, fun) do
     b = read(registers, b)
     update_i(registers, {a, b, c}, fun)

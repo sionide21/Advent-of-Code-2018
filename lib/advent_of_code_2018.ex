@@ -54,6 +54,10 @@ defmodule AOC do
     {read_file("16_1"), read_file("16_2")}
   end
 
+  def input("19") do
+    read_file("19_fast")
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -306,7 +310,18 @@ defmodule AOC do
       |> AOC.Day19.parse()
       |> AOC.Day19.run()
 
-      IO.inspect(program.registers)
+    elem(program.registers, 0)
+  end
+
+  def day("19", "2", input) do
+    program =
+      input
+      |> Enum.to_list()
+      |> AOC.Day19.parse()
+
+    program =
+      %{program | registers: {1, 0, 0, 0, 0, 0}}
+      |> AOC.Day19.run()
 
     elem(program.registers, 0)
   end
