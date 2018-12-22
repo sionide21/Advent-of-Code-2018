@@ -81,7 +81,7 @@ defmodule AOC.Day22 do
   def djikstra(map, acc, fun) do
     queue =
       PriorityQueue.new()
-      |> PriorityQueue.insert(0, {:start, {:torch, {0, 0}}})
+      |> PriorityQueue.insert(0, {0, :start, {:torch, {0, 0}}})
 
     do_djikstra(map, queue, MapSet.new(), acc, fun)
   end
@@ -90,7 +90,7 @@ defmodule AOC.Day22 do
     queue
     |> PriorityQueue.out()
     |> case do
-      {{cost, {from, to}}, queue} ->
+      {{_, {cost, from, to}}, queue} ->
         if MapSet.member?(seen, to) do
           do_djikstra(map, queue, seen, acc, fun)
         else
@@ -119,7 +119,7 @@ defmodule AOC.Day22 do
       {map, tools} = possible_tools(map, neighbor)
       queue =
         if current_tool in tools do
-          PriorityQueue.insert(queue, cost + 1, {{x, y}, {current_tool, neighbor}})
+          PriorityQueue.insert(queue, cost + 1 + hueristic(map, {current_tool, neighbor}), {cost + 1, {x, y}, {current_tool, neighbor}})
         else
           queue
         end
@@ -131,7 +131,7 @@ defmodule AOC.Day22 do
   def switch_tools(map, queue, cost, {current_tool, coord}) do
     {map, tools} = possible_tools(map, coord)
     queue = Enum.reduce(tools -- [current_tool], queue, fn tool, queue ->
-      PriorityQueue.insert(queue, cost + 7, {coord, {tool, coord}})
+      PriorityQueue.insert(queue, cost + 7 + hueristic(map, {tool, coord}), {cost + 7, coord, {tool, coord}})
     end)
     {map, queue}
   end
@@ -146,5 +146,10 @@ defmodule AOC.Day22 do
       end
 
     {map, tools}
+  end
+
+  def hueristic(map, {current_tool, {x, y}}) do
+    {tx, ty} = map.target
+    abs(tx - x) + abs(ty - y) + if(current_tool == :torch, do: 0, else: 7)
   end
 end
