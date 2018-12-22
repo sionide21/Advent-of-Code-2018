@@ -326,6 +326,19 @@ defmodule AOC do
     elem(program.registers, 0)
   end
 
+  def day("22", "1", input) do
+    input
+    |> AOC.Day22.parse()
+    |> AOC.Day22.risk()
+    |> elem(1)
+  end
+
+  def day("22", "2", input) do
+    input
+    |> AOC.Day22.parse()
+    |> AOC.Day22.shortest_path()
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end
