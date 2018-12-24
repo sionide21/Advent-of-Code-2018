@@ -339,6 +339,15 @@ defmodule AOC do
     |> AOC.Day22.shortest_path()
   end
 
+  def day("23", "1", input) do
+    bots = AOC.Day23.parse(input)
+    best = Enum.max_by(bots, &(&1.r))
+    bots
+    |> Enum.count(fn bot ->
+      AOC.Day23.Bot.dist(bot, best) <= best.r
+    end)
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end
