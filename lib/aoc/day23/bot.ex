@@ -8,4 +8,21 @@ defmodule AOC.Day23.Bot do
     end)
     |> Enum.sum()
   end
+
+  def cubify(bot) do
+    [:x, :y, :z]
+    |> Enum.map(fn dim ->
+      center = Map.get(bot, dim)
+      {center - bot.r, center + bot.r}
+    end)
+    |> List.to_tuple()
+  end
+
+  def cover?(bot, {x, y, z}) do
+    dist(bot, %{x: x, y: y, z: z}) <= bot.r
+  end
+
+  def overlap?(bot1, bot2) do
+    dist(bot1, bot2) < (bot1.r + bot2.r)
+  end
 end

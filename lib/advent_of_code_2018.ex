@@ -348,6 +348,14 @@ defmodule AOC do
     end)
   end
 
+  def day("23", "2", input) do
+    input
+    |> AOC.Day23.parse()
+    |> AOC.Day23.best_region()
+    |> elem(1)
+    |> IO.inspect
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end
