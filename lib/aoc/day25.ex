@@ -10,7 +10,7 @@ defmodule AOC.Day25 do
   def constellations(points) do
     Enum.reduce(points, [], fn point, constellations ->
       {joined, rest} = find_constellations(constellations, point)
-      new_const = [point | Enum.flat_map(joined, &(&1))]
+      new_const = [point | Enum.flat_map(joined, & &1)]
       [new_const | rest]
     end)
   end

@@ -23,6 +23,7 @@ defmodule AOC.Day22 do
 
   def risk(map) do
     {tx, ty} = map.target
+
     Enum.reduce(0..tx, {map, 0}, fn x, acc ->
       Enum.reduce(0..ty, acc, fn y, {map, sum} ->
         {map, type} = type(map, {x, y})
@@ -34,15 +35,19 @@ defmodule AOC.Day22 do
   def index(map, {0, 0}) do
     {map, 0}
   end
+
   def index(%{target: coord} = map, coord) do
     {map, 0}
   end
+
   def index(map, {x, 0}) do
     {map, x * 16807}
   end
+
   def index(map, {0, y}) do
     {map, y * 48271}
   end
+
   def index(map, {x, y}) do
     {map, left} = erosion(map, {x - 1, y})
     {map, up} = erosion(map, {x, y - 1})
@@ -68,8 +73,10 @@ defmodule AOC.Day22 do
 
   def shortest_path(map) do
     target = {:torch, map.target}
+
     djikstra(map, %{}, fn {cost, {from, to}}, acc ->
       cost = cost + Map.get(acc, from, 0)
+
       if to == target do
         {:halt, cost}
       else
@@ -95,6 +102,7 @@ defmodule AOC.Day22 do
           do_djikstra(map, queue, seen, acc, fun)
         else
           seen = MapSet.put(seen, to)
+
           fun.({cost, {from, to}}, acc)
           |> case do
             {:cont, acc} ->
@@ -117,6 +125,7 @@ defmodule AOC.Day22 do
     |> Enum.filter(fn {x, y} -> x >= 0 and y >= 0 end)
     |> Enum.reduce({map, queue}, fn neighbor, {map, queue} ->
       {map, tools} = possible_tools(map, neighbor)
+
       queue =
         if current_tool in tools do
           enqueue(map, queue, cost + 1, {x, y}, {current_tool, neighbor})
@@ -130,9 +139,12 @@ defmodule AOC.Day22 do
 
   def switch_tools(map, queue, cost, {current_tool, coord}) do
     {map, tools} = possible_tools(map, coord)
-    queue = Enum.reduce(tools -- [current_tool], queue, fn tool, queue ->
-      enqueue(map, queue, cost + 7, coord, {tool, coord})
-    end)
+
+    queue =
+      Enum.reduce(tools -- [current_tool], queue, fn tool, queue ->
+        enqueue(map, queue, cost + 7, coord, {tool, coord})
+      end)
+
     {map, queue}
   end
 
@@ -142,6 +154,7 @@ defmodule AOC.Day22 do
 
   def possible_tools(map, coord) do
     {map, type} = type(map, coord)
+
     tools =
       case type do
         0 -> [:climbing, :torch]

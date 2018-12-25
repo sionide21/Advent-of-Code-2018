@@ -12,10 +12,12 @@ defmodule AOC.Day24.Group do
   def best_target(_group, []) do
     :none
   end
+
   def best_target(group, victims) do
-    victim = Enum.max_by(victims, fn victim ->
-      {damage(victim, group.type), effective_power(victim), victim.initiative}
-    end)
+    victim =
+      Enum.max_by(victims, fn victim ->
+        {damage(victim, group.type), effective_power(victim), victim.initiative}
+      end)
 
     if damage(victim, group.type) > 0 do
       {:ok, victim}
@@ -33,6 +35,7 @@ defmodule AOC.Day24.Group do
     # damage = (damage(group, type) |> IO.inspect(label: "multiplier")) * IO.inspect(amount, label: "amount")
     damage = damage(group, type) * amount
     units = div(damage, group.hp) # |> IO.inspect(label: "units killed")
+
     case group.units - units do
       units when units > 0 ->
         # IO.puts("#{group.id} now has #{units} units")
@@ -81,6 +84,7 @@ defmodule AOC.Day24.Group do
     |> Enum.flat_map(fn
       {_, ""} ->
         []
+
       {k, v} ->
         v
         |> String.split(", ")

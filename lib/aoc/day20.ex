@@ -73,9 +73,12 @@ defmodule AOC.Day20 do
       {{:value, {from, to}}, queue} ->
         {children, graph} = Map.pop(graph, to, [])
         acc = fun.({from, to}, acc)
-        queue = Enum.reduce(children, queue, fn child, queue ->
-          :queue.in({to, child}, queue)
-        end)
+
+        queue =
+          Enum.reduce(children, queue, fn child, queue ->
+            :queue.in({to, child}, queue)
+          end)
+
         do_bfs(graph, queue, acc, fun)
 
       {:empty, _} ->

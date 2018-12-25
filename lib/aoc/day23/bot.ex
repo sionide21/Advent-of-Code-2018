@@ -23,6 +23,6 @@ defmodule AOC.Day23.Bot do
   end
 
   def overlap?(bot1, bot2) do
-    dist(bot1, bot2) < (bot1.r + bot2.r)
+    dist(bot1, bot2) < bot1.r + bot2.r
   end
 end

@@ -54,6 +54,7 @@ defmodule AOC.Day23 do
 
   def best_region(bots) do
     cubes = cubes(bots)
+
     cubes
     |> bounds()
     |> do_best_region(cubes, [], %{})
@@ -77,8 +78,12 @@ defmodule AOC.Day23 do
 
       with_me ->
         new_bots = Enum.sort([with_me | bots])
-        {memo, {region1, coverage1}} = memoize(memo, new_bots, fn -> do_best_region(with_me, rest, new_bots, memo) end)
-        {memo, {region2, coverage2}} = memoize(memo, bots, fn -> do_best_region(common, rest, bots, memo) end)
+
+        {memo, {region1, coverage1}} =
+          memoize(memo, new_bots, fn -> do_best_region(with_me, rest, new_bots, memo) end)
+
+        {memo, {region2, coverage2}} =
+          memoize(memo, bots, fn -> do_best_region(common, rest, bots, memo) end)
 
         if coverage1 > coverage2 do
           {memo, {region1, coverage1}}
@@ -108,8 +113,7 @@ defmodule AOC.Day23 do
   def intersect({x1, y1, z1}, {x2, y2, z2}) do
     with {:ok, x} <- overlapping_interval(x1, x2),
          {:ok, y} <- overlapping_interval(y1, y2),
-         {:ok, z} <- overlapping_interval(z1, z2)
-    do
+         {:ok, z} <- overlapping_interval(z1, z2) do
       {x, y, z}
     else
       :empty -> :empty

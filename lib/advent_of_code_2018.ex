@@ -345,7 +345,8 @@ defmodule AOC do
 
   def day("23", "1", input) do
     bots = AOC.Day23.parse(input)
-    best = Enum.max_by(bots, &(&1.r))
+    best = Enum.max_by(bots, & &1.r)
+
     bots
     |> Enum.count(fn bot ->
       AOC.Day23.Bot.dist(bot, best) <= best.r
@@ -357,7 +358,7 @@ defmodule AOC do
     |> AOC.Day23.parse()
     |> AOC.Day23.best_region()
     |> elem(1)
-    |> IO.inspect
+    |> IO.inspect()
   end
 
   def day("24", "1", input) do
@@ -366,7 +367,7 @@ defmodule AOC do
     |> AOC.Day24.fight()
     |> elem(1)
     |> Map.values()
-    |> Enum.map(&(&1.units))
+    |> Enum.map(& &1.units)
     |> Enum.sum()
   end
 
@@ -375,7 +376,7 @@ defmodule AOC do
     |> AOC.Day24.parse()
     |> AOC.Day24.boost(1)
     |> Map.values()
-    |> Enum.map(&(&1.units))
+    |> Enum.map(& &1.units)
     |> Enum.sum()
   end
 

@@ -42,8 +42,7 @@ defmodule AOC.Day24 do
     |> Enum.reverse()
     |> Enum.reduce(groups, fn {attacker_id, victim_id}, groups ->
       with {:ok, attacker} <- Map.fetch(groups, attacker_id),
-           {:ok, victim} <- Map.fetch(groups, victim_id)
-      do
+           {:ok, victim} <- Map.fetch(groups, victim_id) do
         case Group.attack(attacker, victim) do
           :dead ->
             Map.delete(groups, victim_id)
@@ -67,11 +66,12 @@ defmodule AOC.Day24 do
 
     results
     |> Map.values()
-    |> Enum.map(&(&1.team))
+    |> Enum.map(& &1.team)
     |> Enum.uniq()
     |> case do
       [winner] ->
         {winner, results}
+
       _ ->
         if results == groups do
           {nil, results}
