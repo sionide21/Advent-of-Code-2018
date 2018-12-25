@@ -379,6 +379,13 @@ defmodule AOC do
     |> Enum.sum()
   end
 
+  def day("25", "1", input) do
+    input
+    |> AOC.Day25.parse()
+    |> AOC.Day25.constellations()
+    |> Enum.count()
+  end
+
   def day(_, _, _) do
     "Not Implemented"
   end

@@ -400,4 +400,21 @@ defmodule AOCTest do
 
     assert AOC.day("24", "2", {good, bad}) == 51
   end
+
+  test "Day 25 part 1" do
+    input = [
+      "-1,2,2,0",
+      "0,0,2,-2",
+      "0,0,0,-2",
+      "-1,2,0,0",
+      "-2,-2,-2,2",
+      "3,0,2,-1",
+      "-1,3,2,2",
+      "-1,0,-1,0",
+      "0,2,1,-2",
+      "3,0,0,0"
+    ]
+
+    assert AOC.day("25", "1", input) == 4
+  end
 end
