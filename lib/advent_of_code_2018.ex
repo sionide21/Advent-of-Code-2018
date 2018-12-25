@@ -58,6 +58,10 @@ defmodule AOC do
     read_file("19_fast")
   end
 
+  def input("24") do
+    {read_file("24_immune"), read_file("24_infection")}
+  end
+
   def input(day) do
     read_file(day)
   end
@@ -354,6 +358,25 @@ defmodule AOC do
     |> AOC.Day23.best_region()
     |> elem(1)
     |> IO.inspect
+  end
+
+  def day("24", "1", input) do
+    input
+    |> AOC.Day24.parse()
+    |> AOC.Day24.fight()
+    |> elem(1)
+    |> Map.values()
+    |> Enum.map(&(&1.units))
+    |> Enum.sum()
+  end
+
+  def day("24", "2", input) do
+    input
+    |> AOC.Day24.parse()
+    |> AOC.Day24.boost(1)
+    |> Map.values()
+    |> Enum.map(&(&1.units))
+    |> Enum.sum()
   end
 
   def day(_, _, _) do

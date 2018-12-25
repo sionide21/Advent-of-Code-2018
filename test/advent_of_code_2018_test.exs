@@ -372,4 +372,32 @@ defmodule AOCTest do
 
     assert AOC.day("23", "2", input) == 36
   end
+
+  test "Day 24 part 1" do
+    good = [
+      "17 units each with 5390 hit points (weak to radiation, bludgeoning) with an attack that does 4507 fire damage at initiative 2",
+      "989 units each with 1274 hit points (immune to fire; weak to bludgeoning, slashing) with an attack that does 25 slashing damage at initiative 3"
+    ]
+
+    bad = [
+      "801 units each with 4706 hit points (weak to radiation) with an attack that does 116 bludgeoning damage at initiative 1",
+      "4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4"
+    ]
+
+    assert AOC.day("24", "1", {good, bad}) == 5216
+  end
+
+  test "Day 24 part 2" do
+    good = [
+      "17 units each with 5390 hit points (weak to radiation, bludgeoning) with an attack that does 4507 fire damage at initiative 2",
+      "989 units each with 1274 hit points (immune to fire; weak to bludgeoning, slashing) with an attack that does 25 slashing damage at initiative 3"
+    ]
+
+    bad = [
+      "801 units each with 4706 hit points (weak to radiation) with an attack that does 116 bludgeoning damage at initiative 1",
+      "4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4"
+    ]
+
+    assert AOC.day("24", "2", {good, bad}) == 51
+  end
 end
