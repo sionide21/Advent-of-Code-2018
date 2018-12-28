@@ -289,6 +289,13 @@ defmodule AOC do
     |> elem(0)
   end
 
+  def day("17", "1", input) do
+    input
+    |> AOC.Day17.parse()
+    |> AOC.Day17.run()
+    |> AOC.Day17.count_wet()
+  end
+
   def day("18", "1", input) do
     {_open, trees, lumber} =
       input

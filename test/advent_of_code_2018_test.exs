@@ -312,6 +312,21 @@ defmodule AOCTest do
     assert AOC.day("15", "2", input) == 4988
   end
 
+  test "Day 17 part 1" do
+    input = [
+      "x=495, y=2..7",
+      "y=7, x=495..501",
+      "x=501, y=3..7",
+      "x=498, y=2..4",
+      "x=506, y=1..2",
+      "x=498, y=10..13",
+      "x=504, y=10..13",
+      "y=13, x=498..504"
+    ]
+
+    assert AOC.day("17", "1", input) == 57
+  end
+
   test "Day 18 part 1" do
     input = ~w[
       .#.#...|#.
