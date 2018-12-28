@@ -88,14 +88,25 @@ defmodule AOC.Day17 do
   end
 
   def count_wet(map) do
-    map.map
-    |> Enum.filter(fn {k, _} -> in_bounds?(map, k) end)
-    |> Enum.map(&elem(&1, 1))
-    |> Enum.count(fn
+    count(map, fn
       {:solid, :water} -> true
       {_, {:wet, _}} -> true
       _ -> false
     end)
+  end
+
+  def count_water(map) do
+    count(map, fn
+      {:solid, :water} -> true
+      _ -> false
+    end)
+  end
+
+  defp count(map, fun) do
+    map.map
+    |> Enum.filter(fn {k, _} -> in_bounds?(map, k) end)
+    |> Enum.map(&elem(&1, 1))
+    |> Enum.count(fun)
   end
 
   def type(%{map: map}, square) do
